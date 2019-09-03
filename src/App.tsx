@@ -34,8 +34,8 @@ const books = [
 
 const App: React.FC = () => {
   return (
-    <BookList books={books}></BookList>
+    <BookList books={books} />
   );
-}
+};
 
 export default App;
