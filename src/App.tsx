@@ -1,25 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'semantic-ui-css/semantic.css';
+
+import BookList from './components/BookList';
 import './App.css';
+
+const books = [
+  {
+    isbn: '9783864906466',
+    title: 'Angular',
+    authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'],
+    published: new Date(2019, 4, 30),
+    subtitle: 'Grundlagen, fortgeschrittene Themen und Best Practices - mit NativeScript und NgRx',
+    rating: 5,
+    thumbnails: [{
+      url: 'https://ng-buch.de/buch1.jpg',
+      title: 'Buchcover'
+    }],
+    description: 'Die Autoren führen Sie mit einem anspruchsvollen Beispielprojekt durch die Welt von Angular...'
+  },
+  {
+    isbn: '9783864903274',
+    title: 'React',
+    authors: ['Oliver Zeigermann', 'Nils Hartmann'],
+    published: new Date(2016, 6, 17),
+    subtitle: 'Die praktische Einführung in React, React Router und Redux',
+    rating: 3,
+    thumbnails: [{
+      url: 'https://ng-buch.de/buch2.jpg',
+      title: 'Buchcover'
+    }],
+    description: 'React ist ein JavaScript-Framework zur Entwicklung von Benutzeroberflächen...'
+  }
+];
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BookList books={books}></BookList>
   );
 }
 
