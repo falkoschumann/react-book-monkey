@@ -30,6 +30,8 @@ export default class BookListItemComponent extends React.Component<Props> {
                 </span>
               );
             })}
+            <br />
+            ISBN {book.isbn}
           </div >
         </div >
       </div >
