@@ -31,8 +31,10 @@ export default class BookDetailsComponent extends React.Component<Props> {
           <div className="four wide column">
             <h4>Erschienen</h4>
             {book.published.toString()}
-            {this.getRating(book.rating ? book.rating : 0)
-              .map((value, index) => <i className="yellow star icon" key={index} />)}
+          </div>
+          <div className="four wide column">
+            <h4>Rating</h4>
+            {this.getRating(book.rating)}
           </div>
         </div >
         <h4>Beschreibung</h4>
@@ -45,8 +47,12 @@ export default class BookDetailsComponent extends React.Component<Props> {
     );
   }
 
-  private getRating(num: number) {
-    return new Array(num);
+  private getRating(num: number = 0) {
+    const rating = [];
+    for (let i = 0; i < num; i++) {
+      rating.push(<i className="yellow star icon" key={i} />);
+    }
+    return rating;
   }
 
 }
