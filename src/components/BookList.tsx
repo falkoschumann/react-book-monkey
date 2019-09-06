@@ -3,7 +3,11 @@ import React from 'react';
 import { Book } from '../api/book';
 import BookListItemComponent from './BookListItem';
 
-export default class BookListComponent extends React.Component {
+interface Props {
+  onShowDetails: (book: Book) => void;
+}
+
+export default class BookListComponent extends React.Component<Props> {
 
   books: Book[] = [
     {
@@ -38,7 +42,7 @@ export default class BookListComponent extends React.Component {
     return (
       <div className="ui middle aligned selection divided list">
         {this.books.map(book => {
-          return <BookListItemComponent key={book.isbn} book={book} />;
+          return <BookListItemComponent key={book.isbn} book={book} onShowDetails={this.props.onShowDetails} />;
         })}
       </div >
     );
