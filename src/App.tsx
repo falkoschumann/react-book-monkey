@@ -14,12 +14,12 @@ interface State {
 
 class App extends React.Component<any, State> {
 
+  showList = () => this.setState({ viewState: 'list' });
+  showDetails = (book: Book) => this.setState({ viewState: 'details', book });
+
   constructor(props: any) {
     super(props);
-
     this.state = { viewState: 'list' };
-    this.showList = this.showList.bind(this);
-    this.showDetails = this.showDetails.bind(this);
   }
 
   render() {
@@ -32,19 +32,6 @@ class App extends React.Component<any, State> {
         <BookDetails book={this.state.book} onShowList={this.showList} />
       );
     }
-  }
-
-  showList() {
-    this.setState({
-      viewState: 'list',
-    });
-  }
-
-  showDetails(book: Book) {
-    this.setState({
-      viewState: 'details',
-      book,
-    });
   }
 
 }

@@ -15,7 +15,7 @@ export default class BookDetailsComponent extends React.Component<Props> {
       return null;
     }
     return (
-      <div>
+      <React.Fragment>
         <h1>{book.title}</h1>
         {book.subtitle ? <h3>{book.subtitle}</h3> : null}
         <div className="ui divider" />
@@ -41,7 +41,7 @@ export default class BookDetailsComponent extends React.Component<Props> {
           {(book.thumbnails ? book.thumbnails : []).map((thumbnail, index) => <img src={thumbnail.url} key={index} />)}
         </div>
         <button className="ui red button" onClick={this.props.onShowList}>Zurück zur Buchliste</button>
-      </div>
+      </React.Fragment>
     );
   }
 

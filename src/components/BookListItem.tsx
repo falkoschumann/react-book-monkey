@@ -9,11 +9,12 @@ export interface Props {
 
 export default class BookListItemComponent extends React.Component<Props> {
 
+  showDetails = () => this.props.onShowDetails(this.props.book);
+
   render() {
     const book = this.props.book;
-    const showDetails = () => this.props.onShowDetails(book);
     return (
-      <div className="item" onClick={showDetails}>
+      <div className="item" onClick={this.showDetails}>
         {book.thumbnails && book.thumbnails[0] && book.thumbnails[0].url
           ? <img className="ui tiny image" src={book.thumbnails[0].url} />
           : null
