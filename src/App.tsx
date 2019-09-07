@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Book } from './api/book';
+import { Book } from './api/Book';
 import BookList from './components/BookList';
 import BookDetails from './components/BookDetails';
 import './App.css';

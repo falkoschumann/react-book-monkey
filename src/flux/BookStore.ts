@@ -1,4 +1,4 @@
-import { Book } from '../api/book';
+import { Book } from '../api/Book';
 
 const books: Book[] = [
   {
@@ -30,11 +30,9 @@ const books: Book[] = [
 ];
 
 const BookStore = {
-
   getAll(): Book[] {
     return books;
   }
-
 };
 
 export default BookStore;

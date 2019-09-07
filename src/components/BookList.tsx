@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Book } from '../api/book';
+import { Book } from '../api/Book';
 import BookStore from '../flux/BookStore';
 import BookListItemComponent from './BookListItem';
 
