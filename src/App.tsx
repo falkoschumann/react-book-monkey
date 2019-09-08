@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
 import './App.css';
 import HomeComponent from './components/Home';
@@ -16,7 +16,9 @@ class App extends React.Component {
           <NavLink to="/books" className="item" activeClassName="active">Bücher</NavLink>
         </ul>
 
-        <Route path="/" exact={true} component={HomeComponent} />
+        <Route path="/" exact={true}>
+          <Redirect to="/home" />
+        </Route>
         <Route path="/home" component={HomeComponent} />
         <Route path="/books" exact={true} component={BookListComponent} />
         <Route path="/books/:isbn" component={BookDetailsComponent} />
