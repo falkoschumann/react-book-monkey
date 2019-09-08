@@ -1,37 +1,27 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
-import { Book } from './api/Book';
-import BookList from './components/BookList';
-import BookDetails from './components/BookDetails';
 import './App.css';
+import HomeComponent from './components/Home';
+import BookListComponent from './components/BookList';
+import BookDetailsComponent from './components/BookDetails';
 
-type ViewState = 'list' | 'details';
-
-interface State {
-  viewState: ViewState;
-  book?: Book;
-}
-
-class App extends React.Component<any, State> {
-
-  showList = () => this.setState({ viewState: 'list' });
-  showDetails = (book: Book) => this.setState({ viewState: 'details', book });
-
-  constructor(props: any) {
-    super(props);
-    this.state = { viewState: 'list' };
-  }
+class App extends React.Component {
 
   render() {
-    if (this.state.viewState === 'list' || this.state.book == null) {
-      return (
-        <BookList onShowDetails={this.showDetails} />
-      );
-    } else {
-      return (
-        <BookDetails book={this.state.book} onShowList={this.showList} />
-      );
-    }
+    return (
+      <Router>
+        <ul className="ui menu">
+          <NavLink to="/home" className="item" activeClassName="active">Home</NavLink>
+          <NavLink to="/books" className="item" activeClassName="active">Bücher</NavLink>
+        </ul>
+
+        <Route path="/" exact={true} component={HomeComponent} />
+        <Route path="/home" component={HomeComponent} />
+        <Route path="/books" exact={true} component={BookListComponent} />
+        <Route path="/books/:isbn" component={BookDetailsComponent} />
+      </Router>
+    );
   }
 
 }

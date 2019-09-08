@@ -1,20 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Book } from '../api/Book';
 
-export interface Props {
+interface Props {
   book: Book;
-  onShowDetails: (book: Book) => void;
 }
 
 export default class BookListItemComponent extends React.Component<Props> {
 
-  showDetails = () => this.props.onShowDetails(this.props.book);
-
   render() {
     const book = this.props.book;
     return (
-      <div className="item" onClick={this.showDetails}>
+      <Link to={'/books/' + book.isbn} className="item">
         {book.thumbnails && book.thumbnails[0] && book.thumbnails[0].url
           ? <img className="ui tiny image" src={book.thumbnails[0].url} />
           : null
@@ -35,9 +33,9 @@ export default class BookListItemComponent extends React.Component<Props> {
             })}
             <br />
             ISBN {book.isbn}
-          </div >
-        </div >
-      </div >
+          </div>
+        </div>
+      </Link>
     );
   }
 

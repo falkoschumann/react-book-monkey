@@ -41,3 +41,17 @@ Datenbereitstellung auszutauschen, ohne dass in der `BookListComponent` eine
 *   Buchinformationen, die an unterschiedlichen Stellen in der
     Benutzeroberfläche dargestellt werden, sollen stets konsistent zueinander
     sein.
+
+## Story - Navigation
+
+Als leser möchte ich mithilfe eines Menüs durch die Anwendung geleitet werden,
+um zwischen Inhalten wechseln zu können.
+
+*   Es soll ein Menü im oberen Bereich der Anwendung existieren.
+*   Es soll eine Startseite existieren, die beim Aufruf der Anwendung angezeigt
+    wird.
+*   Es soll ein Menüpunkt existieren, der nach Aufruf die Liste aller Bücher
+    anzeigt.
+*   Es soll möglich sein, aus der Listenansicht zur Ansicht mit detaillierten
+    Informationen zu einem speziellen Buc zu wechseln.
+*   Jede einzelne Ansicht wird durch eine eindeutige URL repräsentiert.

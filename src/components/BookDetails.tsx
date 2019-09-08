@@ -1,16 +1,25 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router';
 
 import { Book } from '../api/Book';
+import BookStore from '../flux/BookStore';
 
-export interface Props {
+interface UrlParams {
+  isbn: string;
+}
+
+interface Props extends RouteComponentProps<UrlParams> {
   book: Book;
-  onShowList: () => void;
 }
 
 export default class BookDetailsComponent extends React.Component<Props> {
 
   render() {
-    const book = this.props.book;
+    const isbn = this.props.match.params.isbn;
+    if (!isbn) {
+      return null;
+    }
+    const book = BookStore.getSingle(isbn);
     if (!book) {
       return null;
     }
@@ -42,7 +51,6 @@ export default class BookDetailsComponent extends React.Component<Props> {
         <div className="ui small images">
           {(book.thumbnails ? book.thumbnails : []).map((thumbnail, index) => <img src={thumbnail.url} key={index} />)}
         </div>
-        <button className="ui red button" onClick={this.props.onShowList}>Zurück zur Buchliste</button>
       </React.Fragment>
     );
   }
