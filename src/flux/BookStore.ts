@@ -1,41 +1,20 @@
 import { Book } from '../api/Book';
 
-const books: Book[] = [
-  {
-    isbn: '9783864906466',
-    title: 'Angular',
-    authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'],
-    published: new Date(2019, 4, 30),
-    subtitle: 'Grundlagen, fortgeschrittene Themen und Best Practices - mit NativeScript und NgRx',
-    rating: 5,
-    thumbnails: [{
-      url: 'https://ng-buch.de/buch1.jpg',
-      title: 'Buchcover'
-    }],
-    description: 'Die Autoren führen Sie mit einem anspruchsvollen Beispielprojekt durch die Welt von Angular...'
-  },
-  {
-    isbn: '9783864903274',
-    title: 'React',
-    authors: ['Oliver Zeigermann', 'Nils Hartmann'],
-    published: new Date(2016, 6, 17),
-    subtitle: 'Die praktische Einführung in React, React Router und Redux',
-    rating: 3,
-    thumbnails: [{
-      url: 'https://ng-buch.de/buch2.jpg',
-      title: 'Buchcover'
-    }],
-    description: 'React ist ein JavaScript-Framework zur Entwicklung von Benutzeroberflächen...'
-  }
-];
+const api = 'http://localhost:3000';
 
 const BookStore = {
-  getAll(): Book[] {
-    return books;
+  getAll(): Promise<Book[]> {
+    return fetch(`${api}/books`)
+      .then(response => response.json());
   },
 
-  getSingle(isbn: string): Book | undefined {
-    return books.find(book => book.isbn === isbn);
+  getSingle(isbn: string): Promise<Book> {
+    return fetch(`${api}/books/${isbn}`)
+      .then(response => response.json());
+  },
+
+  remove(isbn: string): Promise<any> {
+    return fetch(`${api}/books/${isbn}`, { method: 'DELETE' });
   }
 };
 

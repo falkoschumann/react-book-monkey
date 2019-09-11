@@ -55,3 +55,12 @@ um zwischen Inhalten wechseln zu können.
 *   Es soll möglich sein, aus der Listenansicht zur Ansicht mit detaillierten
     Informationen zu einem speziellen Buc zu wechseln.
 *   Jede einzelne Ansicht wird durch eine eindeutige URL repräsentiert.
+
+## Story - HTTP
+
+Als Leser möchte ich auf die neuesten verfügbaren Buchinformationen zugreifen,
+um mich über neue Inhalte oder Aktualisierungen auf dem Laufenden zu halten.
+
+*   Buchinformationen sollen von einer zentralen Datenquelle bezogen werden.
+*   Ändern sich Daten der zentralen Quelle, so werden die Änderungen nach dem
+    Neuladen in der Book-Monkey-Anwendung sichtbar.

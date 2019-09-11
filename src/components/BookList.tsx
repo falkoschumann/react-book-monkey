@@ -13,8 +13,9 @@ export default class BookListComponent extends React.Component<{}, State> {
   constructor(props = {}) {
     super(props);
     this.state = {
-      books: BookStore.getAll()
+      books: []
     };
+    BookStore.getAll().then(books => this.setState({ books }));
   }
 
   render() {

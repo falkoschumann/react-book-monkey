@@ -8,18 +8,26 @@ interface UrlParams {
   isbn: string;
 }
 
-interface Props extends RouteComponentProps<UrlParams> {
-  book: Book;
+interface Props extends RouteComponentProps<UrlParams> { }
+
+interface State {
+  book: Book | null;
 }
 
-export default class BookDetailsComponent extends React.Component<Props> {
+export default class BookDetailsComponent extends React.Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { book: null };
+    const isbn = this.props.match.params.isbn;
+    if (isbn) {
+      BookStore.getSingle(isbn)
+        .then(book => book ? this.setState({ book }) : null);
+    }
+  }
 
   render() {
-    const isbn = this.props.match.params.isbn;
-    if (!isbn) {
-      return null;
-    }
-    const book = BookStore.getSingle(isbn);
+    const book = this.state.book;
     if (!book) {
       return null;
     }
