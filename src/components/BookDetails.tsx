@@ -21,8 +21,7 @@ export default class BookDetailsComponent extends React.Component<Props, State> 
     this.state = { book: null };
     const isbn = this.props.match.params.isbn;
     if (isbn) {
-      BookStore.getSingle(isbn)
-        .then(book => book ? this.setState({ book }) : null);
+      BookStore.getSingle(isbn).subscribe(book => book ? this.setState({ book }) : null);
     }
   }
 
