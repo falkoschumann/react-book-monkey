@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Book } from '../api/Book';
 import BookStore from '../flux/BookStore';
@@ -12,13 +12,28 @@ interface Props extends RouteComponentProps<UrlParams> { }
 
 interface State {
   book: Book | null;
+  removed: boolean;
 }
 
 export default class BookDetailsComponent extends React.Component<Props, State> {
 
+  private removeBook = () => {
+    if (!this.state.book) {
+      return;
+    }
+
+    if (window.confirm('Buch wirklich löschen?')) {
+      BookStore.remove(this.state.book.isbn)
+        .subscribe(() => this.setState({ removed: true }));
+    }
+  }
+
   constructor(props: Props) {
     super(props);
-    this.state = { book: null };
+    this.state = {
+      book: null,
+      removed: false
+    };
     const isbn = this.props.match.params.isbn;
     if (isbn) {
       BookStore.getSingle(isbn).subscribe(book => book ? this.setState({ book }) : null);
@@ -26,9 +41,13 @@ export default class BookDetailsComponent extends React.Component<Props, State> 
   }
 
   render() {
+    if (this.state.removed) {
+      return <Redirect to="/books" />;
+    }
+
     const book = this.state.book;
     if (!book) {
-      return null;
+      return <div className="ui active centered inline loader" />;
     }
     return (
       <React.Fragment>
@@ -58,6 +77,9 @@ export default class BookDetailsComponent extends React.Component<Props, State> 
         <div className="ui small images">
           {(book.thumbnails ? book.thumbnails : []).map((thumbnail, index) => <img src={thumbnail.url} key={index} />)}
         </div>
+        <button className="ui tiny red labeled icon button" onClick={this.removeBook}>
+          <i className="remove icon" /> Buch löschen
+        </button>
       </React.Fragment>
     );
   }

@@ -21,10 +21,9 @@ const BookStore = {
   },
 
   remove(isbn: string): Observable<any> {
-    return Observable.create((observer: Observer<Book[]>) => {
+    return Observable.create((observer: Observer<any>) => {
       fetch(`${api}/books/${isbn}`, { method: 'DELETE' })
-        .then(response => response.json())
-        .then(books => observer.next(books));
+        .then(() => observer.next(null));
     });
   }
 };

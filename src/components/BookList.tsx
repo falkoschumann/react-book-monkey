@@ -22,25 +22,14 @@ export default class BookListComponent extends React.Component<{}, State> {
   }
 
   render() {
-    let books;
-    if (this.state.books) {
-      if (!this.state.books.length) {
-        books = <p>Es wurden noch keine Bücher eingetragen.</p>;
-      } else {
-        books = this.state.books.map(book => {
-          return <BookListItemComponent key={book.isbn} book={book} />;
-        });
-      }
-    } else {
-      books = (
-        <div className="ui active dimmer">
-          <div className="ui large text loader">Daten werden geladen...</div>
-        </div>
-      );
-    }
     return (
       <div className="ui middle aligned selection divided list">
-        {books}
+        {this.state.books
+          ? this.state.books.length > 0
+            ? this.state.books.map(book => <BookListItemComponent key={book.isbn} book={book} />)
+            : <p>Es wurden noch keine Bücher eingetragen.</p>
+          : <div className="ui active dimmer"><div className="ui large text loader">Daten werden geladen...</div></div>
+        }
       </div >
     );
   }
